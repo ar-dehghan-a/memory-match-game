@@ -1,5 +1,4 @@
 import {useRef, useEffect, useState} from 'react'
-import {DotLottieReact} from '@lottiefiles/dotlottie-react'
 import {isBetterScore} from '@/lib/utils'
 import {useSettings} from '@/providers/settings-provider'
 import {useSound} from '@/hooks/use-sound'
@@ -18,7 +17,6 @@ import Img7 from '../assets/images/product-7.jpg'
 import Img8 from '../assets/images/product-8.jpg'
 import flipSound from '../assets/sounds/flip.mp3'
 import coinSound from '../assets/sounds/coin.mp3'
-import confettiAnimation from '../assets/animations/confetti.json'
 
 const initialCards = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8]
 const BEST_SCORE_KEY = 'memory-best-score'
@@ -94,9 +92,6 @@ function MemoryGame() {
         <GameActions gameStarted={status === 'playing'} startGame={startGame} resetGame={handleResetGame} />
       </Layout.Content>
 
-      {result === 'win' && (
-        <DotLottieReact className="fixed inset-0 z-500" data={confettiAnimation} loop autoplay />
-      )}
       <GameFinishedDialog
         result={result}
         onRestart={handleResetGame}

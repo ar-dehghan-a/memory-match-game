@@ -7,7 +7,7 @@ export function GameActions({gameStarted, startGame, resetGame, className}) {
     <div className={cn('flex justify-center mt-4 pb-2 sm:mt-6 sm:pb-0', className)}>
       {gameStarted ? (
         <Button onClick={resetGame}>
-          <RotateCcw /> شروع مجدد
+          <RotateCcw /> شروع دوباره
         </Button>
       ) : (
         <Button onClick={startGame}>

@@ -21,7 +21,7 @@ const themes = [
 
 const parseNumber = value => {
   const digits = toEnglish(value)
-  const n = parseInt(digits, 10)
+  const n = parseInt(digits)
   return Number.isNaN(n) ? 0 : n
 }
 
@@ -84,7 +84,7 @@ export function GameSettingsDialog({gameStarted}) {
             <p className="text-sm text-muted-foreground">قوانین بازی</p>
             {gameStarted && (
               <p className="text-xs text-muted-foreground">
-                برای تغییر حد حرکت یا زمان، بازی را تمام کنید یا شروع مجدد بزنید.
+                برای تغییر حد حرکت یا زمان، بازی را تمام کنید یا شروع دوباره بزنید.
               </p>
             )}
             <div className="grid gap-3 sm:grid-cols-2">
