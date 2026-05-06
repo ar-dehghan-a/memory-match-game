@@ -52,21 +52,11 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
     setStatus('preview')
     setFlipped(cards)
 
-    if (card) {
-      const nextMoves = Math.max(movesLeft - 1, 0)
-      setMovesLeft(nextMoves)
-      if (nextMoves === 0) {
-        setStatus('finished')
-        setResult('gameover')
-        onFinish?.()
-        return
-      }
-    }
-
+    setMovesLeft(prev => prev - 1)
     onStart?.()
 
     setTimeout(() => {
-      setFlipped(card ? [card] : [])
+      setFlipped([card])
       setStatus('playing')
     }, 4000)
   }
