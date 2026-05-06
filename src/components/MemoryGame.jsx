@@ -89,7 +89,7 @@ function MemoryGame() {
           onCardClick={flipCard}
         />
 
-        <GameActions gameStarted={status === 'playing'} startGame={startGame} resetGame={handleResetGame} />
+        <GameActions gameStatus={status} startGame={startGame} resetGame={handleResetGame} />
       </Layout.Content>
 
       <GameFinishedDialog
