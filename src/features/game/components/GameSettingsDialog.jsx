@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useSettings} from '@/providers/settings-provider'
-import {toEnglish, toPersian} from '@/lib/utils'
+import {clamp, toEnglish, toPersian} from '@/lib/utils'
 import {
   Dialog,
   DialogContent,
@@ -34,24 +34,17 @@ export function GameSettingsDialog({gameStarted}) {
     timeLimit: settings.timeLimit,
   })
 
-  const handleMoveInput = e => {
-    const n = parseNumber(e.target.value)
-    setDraft(prev => ({...prev, moveLimit: Math.min(n, MAX_MOVE_LIMIT)}))
-  }
-
-  const handleTimeInput = e => {
-    const n = parseNumber(e.target.value)
-    setDraft(prev => ({...prev, timeLimit: Math.min(n, MAX_TIME_LIMIT)}))
-  }
+  const handleMoveInput = e => setDraft(prev => ({...prev, moveLimit: parseNumber(e.target.value)}))
+  const handleTimeInput = e => setDraft(prev => ({...prev, timeLimit: parseNumber(e.target.value)}))
 
   const handleMoveBlur = () => {
-    const moveLimit = Math.max(draft.moveLimit, MIN_MOVE_LIMIT)
+    const moveLimit = clamp(draft.moveLimit, MIN_MOVE_LIMIT, MAX_MOVE_LIMIT)
     setDraft(prev => ({...prev, moveLimit: moveLimit}))
     setSettings(prev => ({...prev, moveLimit: moveLimit}))
   }
 
   const handleTimeBlur = () => {
-    const timeLimit = Math.max(draft.timeLimit, MIN_TIME_LIMIT)
+    const timeLimit = clamp(draft.timeLimit, MIN_TIME_LIMIT, MAX_TIME_LIMIT)
     setDraft(prev => ({...prev, timeLimit: timeLimit}))
     setSettings(prev => ({...prev, timeLimit: timeLimit}))
   }

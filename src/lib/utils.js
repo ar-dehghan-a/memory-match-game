@@ -16,6 +16,8 @@ export const pad = n => {
   return String(n).padStart(2, '0')
 }
 
+export const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+
 export const toPersian = input => String(input).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
 
 export const toEnglish = input =>
