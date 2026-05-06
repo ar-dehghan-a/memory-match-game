@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {useSettings} from '@/providers/settings-provider'
 import {toEnglish, toPersian} from '@/lib/utils'
 import {
@@ -10,7 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
-import {MAX_MOVE_LIMIT, MAX_TIME_LIMIT} from '../constants'
+import {MAX_MOVE_LIMIT, MAX_TIME_LIMIT, MIN_MOVE_LIMIT, MIN_TIME_LIMIT} from '../constants'
 import {Settings, Monitor, Moon, Sun} from 'lucide-react'
 
 const themes = [
@@ -28,20 +29,31 @@ const parseNumber = value => {
 export function GameSettingsDialog({gameStarted}) {
   const {theme, setTheme, settings, setSettings} = useSettings()
 
+  const [draft, setDraft] = useState({
+    moveLimit: settings.moveLimit,
+    timeLimit: settings.timeLimit,
+  })
+
   const handleMoveInput = e => {
     const n = parseNumber(e.target.value)
-    setSettings(prev => ({
-      ...prev,
-      moveLimit: Math.min(n, MAX_MOVE_LIMIT),
-    }))
+    setDraft(prev => ({...prev, moveLimit: Math.min(n, MAX_MOVE_LIMIT)}))
   }
 
   const handleTimeInput = e => {
     const n = parseNumber(e.target.value)
-    setSettings(prev => ({
-      ...prev,
-      timeLimit: Math.min(n, MAX_TIME_LIMIT),
-    }))
+    setDraft(prev => ({...prev, timeLimit: Math.min(n, MAX_TIME_LIMIT)}))
+  }
+
+  const handleMoveBlur = () => {
+    const moveLimit = Math.max(draft.moveLimit, MIN_MOVE_LIMIT)
+    setDraft(prev => ({...prev, moveLimit: moveLimit}))
+    setSettings(prev => ({...prev, moveLimit: moveLimit}))
+  }
+
+  const handleTimeBlur = () => {
+    const timeLimit = Math.max(draft.timeLimit, MIN_TIME_LIMIT)
+    setDraft(prev => ({...prev, timeLimit: timeLimit}))
+    setSettings(prev => ({...prev, timeLimit: timeLimit}))
   }
 
   return (
@@ -95,11 +107,14 @@ export function GameSettingsDialog({gameStarted}) {
                 <Input
                   id="settings-move-limit"
                   type="text"
-                  value={toPersian(settings.moveLimit)}
+                  value={toPersian(draft.moveLimit)}
                   disabled={gameStarted}
                   onChange={handleMoveInput}
+                  onBlur={handleMoveBlur}
                 />
-                <p className="text-xs text-muted-foreground">حداکثر تا {toPersian(MAX_MOVE_LIMIT)} حرکت</p>
+                <p className="text-xs text-muted-foreground">
+                  حداقل {toPersian(MIN_MOVE_LIMIT)} حداکثر {toPersian(MAX_MOVE_LIMIT)} حرکت
+                </p>
               </div>
 
               <div className="space-y-1.5 text-start">
@@ -109,11 +124,14 @@ export function GameSettingsDialog({gameStarted}) {
                 <Input
                   id="settings-time-limit"
                   type="text"
-                  value={toPersian(settings.timeLimit)}
+                  value={toPersian(draft.timeLimit)}
                   disabled={gameStarted}
                   onChange={handleTimeInput}
+                  onBlur={handleTimeBlur}
                 />
-                <p className="text-xs text-muted-foreground">حداکثر تا {toPersian(MAX_TIME_LIMIT)} ثانیه</p>
+                <p className="text-xs text-muted-foreground">
+                  حداقل {toPersian(MIN_TIME_LIMIT)} حداکثر {toPersian(MAX_TIME_LIMIT)} ثانیه
+                </p>
               </div>
             </div>
           </div>
