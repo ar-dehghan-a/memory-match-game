@@ -98,6 +98,12 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
     const nextMoves = Math.max(movesLeft - 1, 0)
     setMovesLeft(nextMoves)
 
+    if (nextMoves === 0) {
+      setStatus('finished')
+      setResult('gameover')
+      onFinish?.()
+    }
+
     if (newFlipped.length === 2) {
       checkMatch(newFlipped[0], newFlipped[1], nextMoves)
     }
