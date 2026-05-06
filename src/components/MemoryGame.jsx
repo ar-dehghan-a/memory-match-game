@@ -57,8 +57,6 @@ function MemoryGame() {
     }
   }
 
-  const handleStartGame = () => startGame()
-
   const handleResetGame = () => {
     resetGame()
     timerRef.current?.reset()
@@ -91,11 +89,7 @@ function MemoryGame() {
           onCardClick={flipCard}
         />
 
-        <GameActions
-          gameStarted={status === 'playing'}
-          startGame={handleStartGame}
-          resetGame={handleResetGame}
-        />
+        <GameActions gameStarted={status === 'playing'} startGame={startGame} resetGame={handleResetGame} />
       </Layout.Content>
 
       <GameFinishedDialog

@@ -38,7 +38,17 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
   const [status, setStatus] = useState('idle') // idle | preview | playing | finished
   const [result, setResult] = useState(null) // 'win', 'gameover', or null
 
-  const startGame = card => {
+  const startGame = () => {
+    setStatus('preview')
+    setFlipped(cards)
+    setTimeout(() => {
+      setFlipped([])
+      setStatus('playing')
+      onStart?.()
+    }, 4000)
+  }
+
+  const startGameAndFlip = card => {
     setStatus('preview')
     setFlipped(cards)
 
@@ -99,7 +109,7 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
   }
 
   const flipCard = card => {
-    if (status === 'idle') return startGame(card)
+    if (status === 'idle') return startGameAndFlip(card)
     if (status !== 'playing') return
     if (flipped.some(c => c.id === card.id)) return
     if (flipped.length === 2) return
