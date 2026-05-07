@@ -49,16 +49,11 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
   }
 
   const startGameAndFlip = card => {
-    setStatus('preview')
-    setFlipped(cards)
-
-    setMovesLeft(prev => prev - 1)
+    setStatus('playing')
     onStart?.()
-
-    setTimeout(() => {
-      setFlipped([card])
-      setStatus('playing')
-    }, 4000)
+    setFlipped([card])
+    onFlip?.()
+    setMovesLeft(prev => prev - 1)
   }
 
   const resetGame = () => {
