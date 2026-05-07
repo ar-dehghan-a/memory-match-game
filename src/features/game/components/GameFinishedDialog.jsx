@@ -1,6 +1,6 @@
-import {DotLottieReact} from '@lottiefiles/dotlottie-react'
-import {cn, formatTime, toPersian} from '@/lib/utils'
-import {Button} from '@/components/ui/button'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import { cn, formatTime, toPersian } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -9,11 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {RotateCcw} from 'lucide-react'
+import { RotateCcw } from 'lucide-react'
 
 import confettiAnimation from '@/assets/animations/confetti.json'
 
-export function GameFinishedDialog({result, onRestart, bestScore, currentScore}) {
+export function GameFinishedDialog({ result, onRestart, bestScore, currentScore }) {
   const isWin = result === 'win'
   const isGameOver = result === 'gameover'
   const open = !!result
@@ -27,8 +27,8 @@ export function GameFinishedDialog({result, onRestart, bestScore, currentScore})
       <Dialog open={open} onOpenChange={() => {}}>
         <DialogContent
           showCloseButton={false}
-          onPointerDownOutside={e => e.preventDefault()}
-          onEscapeKeyDown={e => e.preventDefault()}
+          onPointerDownOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
         >
           <DialogHeader>
             <DialogTitle
@@ -50,20 +50,28 @@ export function GameFinishedDialog({result, onRestart, bestScore, currentScore})
             </DialogDescription>
 
             {isWin && currentScore && (
-              <div className="mt-3 space-y-1 text-center text-sm text-muted-foreground">
+              <div className="text-muted-foreground mt-3 space-y-1 text-center text-sm">
                 <p>
                   عملکرد این دست:{' '}
-                  <span className="font-medium text-foreground">{toPersian(currentScore.movesUsed)}</span>{' '}
+                  <span className="text-foreground font-medium">
+                    {toPersian(currentScore.movesUsed)}
+                  </span>{' '}
                   حرکت، در زمان{' '}
-                  <span className="font-medium text-foreground">{formatTime(currentScore.timeSpent)}</span>
+                  <span className="text-foreground font-medium">
+                    {formatTime(currentScore.timeSpent)}
+                  </span>
                 </p>
 
                 {bestScore && (
                   <p>
                     بهترین رکورد:{' '}
-                    <span className="font-medium text-foreground">{toPersian(bestScore.movesUsed)}</span>{' '}
+                    <span className="text-foreground font-medium">
+                      {toPersian(bestScore.movesUsed)}
+                    </span>{' '}
                     حرکت، در زمان{' '}
-                    <span className="font-medium text-foreground">{formatTime(bestScore.timeSpent)}</span>
+                    <span className="text-foreground font-medium">
+                      {formatTime(bestScore.timeSpent)}
+                    </span>
                   </p>
                 )}
               </div>

@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import {shuffle} from '@/lib/utils'
+import { useState, useEffect } from 'react'
+import { shuffle } from '@/lib/utils'
 
 /**
  * Custom hook for managing the memory game state and logic.
@@ -30,7 +30,7 @@ import {shuffle} from '@/lib/utils'
  * @property {Function} resetGame
  * @property {Function} endGame
  */
-export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch, onFinish}) => {
+export const useMemoryGame = ({ initialCards, settings, onStart, onFlip, onMatch, onFinish }) => {
   const [cards, setCards] = useState(shuffle(initialCards))
   const [flipped, setFlipped] = useState([])
   const [matched, setMatched] = useState([])
@@ -48,12 +48,12 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
     }, 4000)
   }
 
-  const startGameAndFlip = card => {
+  const startGameAndFlip = (card) => {
     setStatus('playing')
     onStart?.()
     setFlipped([card])
     onFlip?.()
-    setMovesLeft(prev => prev - 1)
+    setMovesLeft((prev) => prev - 1)
   }
 
   const resetGame = () => {
@@ -93,10 +93,10 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
       }, 1000)
   }
 
-  const flipCard = card => {
+  const flipCard = (card) => {
     if (status === 'idle') return startGameAndFlip(card)
     if (status !== 'playing') return
-    if (flipped.some(c => c.id === card.id)) return
+    if (flipped.some((c) => c.id === card.id)) return
     if (flipped.length === 2) return
     if (matched.includes(card.id)) return
 
@@ -129,7 +129,7 @@ export const useMemoryGame = ({initialCards, settings, onStart, onFlip, onMatch,
   }, [settings.moveLimit, status])
 
   return {
-    state: {cards, flipped, matched, movesLeft, status, result},
-    actions: {flipCard, startGame, resetGame, endGame},
+    state: { cards, flipped, matched, movesLeft, status, result },
+    actions: { flipCard, startGame, resetGame, endGame },
   }
 }

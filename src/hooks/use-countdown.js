@@ -1,4 +1,4 @@
-import {useRef, useState, useCallback, useEffect} from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 
 /**
  * Custom hook for managing a countdown timer.
@@ -9,7 +9,7 @@ import {useRef, useState, useCallback, useEffect} from 'react'
  *
  * @returns {{time: number, status: string, start: Function, stop: Function, reset: Function}}
  */
-export const useCountdown = ({initialTime, onFinished}) => {
+export const useCountdown = ({ initialTime, onFinished }) => {
   const [time, setTime] = useState(initialTime)
   const [status, setStatus] = useState('idle') // idle | running | paused | done
 
@@ -28,7 +28,7 @@ export const useCountdown = ({initialTime, onFinished}) => {
     setStatus('running')
 
     intervalRef.current = setInterval(() => {
-      setTime(prev => Math.max(prev - 1, 0))
+      setTime((prev) => Math.max(prev - 1, 0))
     }, 1000)
   }, [status])
 

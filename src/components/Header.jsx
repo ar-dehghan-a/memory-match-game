@@ -1,6 +1,6 @@
-import {GameSettingsDialog} from '@/features/game'
+import { GameSettingsDialog } from '@/features/game'
 
-function Header({gameStarted}) {
+function Header({ gameStarted }) {
   return (
     <>
       <GameSettingsDialog gameStarted={gameStarted} />

@@ -1,6 +1,6 @@
-import {cn, toPersian} from '@/lib/utils'
+import { cn, toPersian } from '@/lib/utils'
 
-export function GameBoard({cards, flippedIds = [], matchedIds = [], onCardClick}) {
+export function GameBoard({ cards, flippedIds = [], matchedIds = [], onCardClick }) {
   return (
     <div className="flex items-center justify-center">
       <div
@@ -15,7 +15,7 @@ export function GameBoard({cards, flippedIds = [], matchedIds = [], onCardClick}
             <div
               key={card.id}
               className={cn(
-                'perspective-normal relative size-full transition-all',
+                'relative size-full transition-all perspective-normal',
                 !isMatched && 'cursor-pointer sm:hover:-translate-y-1 sm:hover:scale-105'
               )}
               onClick={() => {
@@ -25,19 +25,19 @@ export function GameBoard({cards, flippedIds = [], matchedIds = [], onCardClick}
               tabIndex={0}
             >
               <div
-                className="transform-3d relative size-full"
+                className="relative size-full transform-3d"
                 style={{
                   transition: 'transform 0.6s cubic-bezier(.4,.2,.2,1)',
                   transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
                 }}
               >
-                <div className="absolute inset-0 flex items-center justify-center select-none rounded-lg bg-primary text-lg text-primary-foreground backface-hidden sm:rounded-xl sm:text-2xl">
+                <div className="bg-primary text-primary-foreground absolute inset-0 flex items-center justify-center rounded-lg text-lg select-none backface-hidden sm:rounded-xl sm:text-2xl">
                   {toPersian(index + 1)}
                 </div>
 
                 <img
                   src={card.source}
-                  className="absolute inset-0 rotate-y-180 backface-hidden select-none rounded-lg object-cover sm:rounded-xl"
+                  className="absolute inset-0 rotate-y-180 rounded-lg object-cover select-none backface-hidden sm:rounded-xl"
                   alt={`کارت ${toPersian(index + 1)}`}
                   draggable={false}
                 />

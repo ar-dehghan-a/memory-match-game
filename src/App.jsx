@@ -1,4 +1,4 @@
-import {SettingsProvider} from './providers/settings-provider'
+import { SettingsProvider } from './providers/settings-provider'
 import MemoryGame from './components/MemoryGame'
 
 function App() {

@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 /**
  * Custom hook for managing localStorage with React state.
@@ -20,9 +20,9 @@ export const useLocalStorage = (key, initialValue) => {
   })
 
   const setValue = useCallback(
-    value => {
+    (value) => {
       try {
-        setStoredValue(prev => {
+        setStoredValue((prev) => {
           const newValue = value instanceof Function ? value(prev) : value
           localStorage.setItem(key, JSON.stringify(newValue))
           return newValue
@@ -44,7 +44,7 @@ export const useLocalStorage = (key, initialValue) => {
   }, [key]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    const handleStorageChange = event => {
+    const handleStorageChange = (event) => {
       if (event.key !== key || event.storageArea !== localStorage) return
 
       try {

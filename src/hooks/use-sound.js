@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useCallback} from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 /**
  * Custom hook for managing audio playback.
@@ -11,7 +11,7 @@ import {useState, useEffect, useRef, useCallback} from 'react'
  *
  * @returns {{play: Function, pause: Function, stop: Function, isPlaying: boolean}}
  */
-export const useSound = (src, {loop = false, volume = 1, clone = false} = {}) => {
+export const useSound = (src, { loop = false, volume = 1, clone = false } = {}) => {
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -68,5 +68,5 @@ export const useSound = (src, {loop = false, volume = 1, clone = false} = {}) =>
     }
   }, [clone])
 
-  return {play, pause, stop, isPlaying}
+  return { play, pause, stop, isPlaying }
 }

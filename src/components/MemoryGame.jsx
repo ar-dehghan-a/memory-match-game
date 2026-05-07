@@ -1,11 +1,17 @@
-import {useRef, useEffect, useState} from 'react'
-import {isBetterScore} from '@/lib/utils'
-import {useSettings} from '@/providers/settings-provider'
-import {useSound} from '@/hooks/use-sound'
-import {useLocalStorage} from '@/hooks/use-local-storage'
+import { useRef, useEffect, useState } from 'react'
+import { isBetterScore } from '@/lib/utils'
+import { useSettings } from '@/providers/settings-provider'
+import { useSound } from '@/hooks/use-sound'
+import { useLocalStorage } from '@/hooks/use-local-storage'
 import Layout from './layout/Layout'
 import Header from './Header'
-import {GameActions, GameBoard, GameStats, GameFinishedDialog, useMemoryGame} from '@/features/game'
+import {
+  GameActions,
+  GameBoard,
+  GameStats,
+  GameFinishedDialog,
+  useMemoryGame,
+} from '@/features/game'
 
 import Img1 from '../assets/images/product-1.jpg'
 import Img2 from '../assets/images/product-2.jpg'
@@ -22,12 +28,12 @@ const initialCards = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8]
 const BEST_SCORE_KEY = 'memory-best-score'
 
 function MemoryGame() {
-  const {settings} = useSettings()
+  const { settings } = useSettings()
 
   const timerRef = useRef(null)
 
-  const flipEffect = useSound(flipSound, {clone: true})
-  const coinEffect = useSound(coinSound, {clone: true})
+  const flipEffect = useSound(flipSound, { clone: true })
+  const coinEffect = useSound(coinSound, { clone: true })
 
   const game = useMemoryGame({
     initialCards,
@@ -37,8 +43,8 @@ function MemoryGame() {
     onMatch: () => setTimeout(coinEffect.play, 600),
     onFinish: () => timerRef.current?.stop(),
   })
-  const {cards, flipped, matched, movesLeft, status, result} = game.state
-  const {flipCard, startGame, resetGame, endGame} = game.actions
+  const { cards, flipped, matched, movesLeft, status, result } = game.state
+  const { flipCard, startGame, resetGame, endGame } = game.actions
 
   const [bestScore, setBestScore] = useLocalStorage(BEST_SCORE_KEY, null)
   const [currentScore, setCurrentScore] = useState(null)
@@ -51,7 +57,7 @@ function MemoryGame() {
         timeSpent: Math.max(settings.timeLimit - timeLeft, 0),
       }
       setCurrentScore(currentRun)
-      setBestScore(prev => (isBetterScore(currentRun, prev) ? currentRun : prev))
+      setBestScore((prev) => (isBetterScore(currentRun, prev) ? currentRun : prev))
     } else {
       setCurrentScore(null)
     }
@@ -84,7 +90,7 @@ function MemoryGame() {
 
         <GameBoard
           cards={cards}
-          flippedIds={flipped.map(s => s.id)}
+          flippedIds={flipped.map((s) => s.id)}
           matchedIds={matched}
           onCardClick={flipCard}
         />

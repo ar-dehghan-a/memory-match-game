@@ -1,5 +1,5 @@
-import {useEffect, useContext, createContext} from 'react'
-import {useLocalStorage} from '@/hooks/use-local-storage'
+import { useEffect, useContext, createContext } from 'react'
+import { useLocalStorage } from '@/hooks/use-local-storage'
 
 const DEFAULT_GAME_SETTINGS = {
   moveLimit: 40,
@@ -18,7 +18,7 @@ const initialState = {
 
 const SettingsProviderContext = createContext(initialState)
 
-export const SettingsProvider = ({children, ...props}) => {
+export const SettingsProvider = ({ children, ...props }) => {
   const [settings, setSettings] = useLocalStorage(GAME_SETTINGS_STORAGE_KEY, DEFAULT_GAME_SETTINGS)
 
   useEffect(() => {
@@ -27,7 +27,9 @@ export const SettingsProvider = ({children, ...props}) => {
     root.classList.remove('light', 'dark')
 
     if (settings.theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
 
       root.classList.add(systemTheme)
       return
@@ -40,7 +42,7 @@ export const SettingsProvider = ({children, ...props}) => {
     settings,
     setSettings,
     theme: settings.theme,
-    setTheme: theme => setSettings(prev => ({...prev, theme})),
+    setTheme: (theme) => setSettings((prev) => ({ ...prev, theme })),
   }
 
   return (

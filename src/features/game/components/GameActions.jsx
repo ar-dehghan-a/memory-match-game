@@ -1,10 +1,10 @@
-import {Button} from '@/components/ui/button'
-import {cn} from '@/lib/utils'
-import {Play, RotateCcw} from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Play, RotateCcw } from 'lucide-react'
 
-export function GameActions({gameStatus, startGame, resetGame, className}) {
+export function GameActions({ gameStatus, startGame, resetGame, className }) {
   return (
-    <div className={cn('flex justify-center mt-4 pb-2 sm:mt-6 sm:pb-0', className)}>
+    <div className={cn('mt-4 flex justify-center pb-2 sm:mt-6 sm:pb-0', className)}>
       {gameStatus === 'playing' ? (
         <Button onClick={resetGame}>
           <RotateCcw /> شروع دوباره

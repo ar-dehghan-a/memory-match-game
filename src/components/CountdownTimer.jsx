@@ -1,12 +1,12 @@
-import {forwardRef, useImperativeHandle} from 'react'
-import {useCountdown} from '@/hooks/use-countdown'
-import {pad, toPersian} from '@/lib/utils'
+import { forwardRef, useImperativeHandle } from 'react'
+import { useCountdown } from '@/hooks/use-countdown'
+import { pad, toPersian } from '@/lib/utils'
 
 const CIRC = 2 * Math.PI * 40
 
-const CountdownTimer = forwardRef(({initialTime, onFinished}, ref) => {
-  const timer = useCountdown({initialTime, onFinished})
-  const {time} = timer
+const CountdownTimer = forwardRef(({ initialTime, onFinished }, ref) => {
+  const timer = useCountdown({ initialTime, onFinished })
+  const { time } = timer
 
   useImperativeHandle(ref, () => timer)
 
@@ -39,12 +39,12 @@ const CountdownTimer = forwardRef(({initialTime, onFinished}, ref) => {
           strokeDasharray={CIRC}
           strokeDashoffset={offset}
           className="text-primary"
-          style={{transition: 'stroke-dashoffset 1s linear, color 0.4s linear'}}
+          style={{ transition: 'stroke-dashoffset 1s linear, color 0.4s linear' }}
         />
       </svg>
 
       <div className="absolute inset-0 flex items-center justify-center gap-0.5" dir="ltr">
-        <span className="text-base font-medium leading-none text-foreground sm:text-xl">
+        <span className="text-foreground text-base leading-none font-medium sm:text-xl">
           {toPersian(pad(m))}:{toPersian(pad(s))}
         </span>
       </div>
