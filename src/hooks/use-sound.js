@@ -26,10 +26,10 @@ export const useSound = (src, {loop = false, volume = 1, clone = false} = {}) =>
       if (clone) {
         const sound = audio.cloneNode()
         if (offsetSeconds > 0) sound.currentTime = offsetSeconds
-        sound.play()
+        sound.play().catch(() => {})
       } else {
         if (offsetSeconds > 0) audio.currentTime = offsetSeconds
-        audio.play()
+        audio.play().catch(() => {})
       }
     },
     [clone]
