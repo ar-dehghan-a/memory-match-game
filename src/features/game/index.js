@@ -1,3 +1,6 @@
+// pages
+export { MemoryGame } from './pages/MemoryGame'
+
 // components
 export { GameBoard } from './components/GameBoard'
 export { GameStats } from './components/GameStats'

@@ -1,5 +1,5 @@
 import { SettingsProvider } from './providers/settings-provider'
-import MemoryGame from './components/MemoryGame'
+import { MemoryGame } from './features/game'
 
 function App() {
   return (

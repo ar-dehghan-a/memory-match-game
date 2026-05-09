@@ -3,8 +3,8 @@ import { isBetterScore } from '@/lib/utils'
 import { useSettings } from '@/providers/settings-provider'
 import { useSound } from '@/hooks/use-sound'
 import { useLocalStorage } from '@/hooks/use-local-storage'
-import Layout from './layout/Layout'
-import Header from './Header'
+import Layout from '@/components/layout/Layout'
+import Header from '@/components/Header'
 import {
   GameActions,
   GameBoard,
@@ -13,21 +13,21 @@ import {
   useMemoryGame,
 } from '@/features/game'
 
-import Img1 from '../assets/images/product-1.jpg'
-import Img2 from '../assets/images/product-2.jpg'
-import Img3 from '../assets/images/product-3.jpg'
-import Img4 from '../assets/images/product-4.jpg'
-import Img5 from '../assets/images/product-5.jpg'
-import Img6 from '../assets/images/product-6.jpg'
-import Img7 from '../assets/images/product-7.jpg'
-import Img8 from '../assets/images/product-8.jpg'
-import flipSound from '../assets/sounds/flip.mp3'
-import coinSound from '../assets/sounds/coin.mp3'
+import Img1 from '@/assets/images/product-1.jpg'
+import Img2 from '@/assets/images/product-2.jpg'
+import Img3 from '@/assets/images/product-3.jpg'
+import Img4 from '@/assets/images/product-4.jpg'
+import Img5 from '@/assets/images/product-5.jpg'
+import Img6 from '@/assets/images/product-6.jpg'
+import Img7 from '@/assets/images/product-7.jpg'
+import Img8 from '@/assets/images/product-8.jpg'
+import flipSound from '@/assets/sounds/flip.mp3'
+import coinSound from '@/assets/sounds/coin.mp3'
 
 const initialCards = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8]
 const BEST_SCORE_KEY = 'memory-best-score'
 
-function MemoryGame() {
+export function MemoryGame() {
   const { settings } = useSettings()
 
   const timerRef = useRef(null)
@@ -107,5 +107,3 @@ function MemoryGame() {
     </Layout>
   )
 }
-
-export default MemoryGame
